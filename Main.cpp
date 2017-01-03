@@ -1,6 +1,9 @@
 #include <Windows.h>
 #include "Graphics.h"
 
+#include "Level1.h"
+#include "GameController.h"
+
 // Graphics pointer
 Graphics * graphics;
 
@@ -80,16 +83,35 @@ int WINAPI wWinMain
 	/* Show Window */
 	ShowWindow(hWnd, nCmdShow);
 
-	/* Message Loop */
-	MSG message = { 0 };
+	/* Game Info */
+	GameController::LoadInitialLevel(new Level1());
+	
 
+	/* Message Loop */
+	MSG message;
+	message.message = WM_NULL;
 
 	// Loop
-	while (GetMessage(&message, NULL, 0, 0))
+	while (message.message != WM_QUIT)
 	{
-		TranslateMessage(&message);
+		if (PeekMessage(&message, NULL, 0, 0, PM_REMOVE))
+		{
 
-		DispatchMessage(&message);
+			DispatchMessage(&message);
+
+		}
+		else
+		{
+			// Update!
+			GameController::Update();
+
+			// Render!
+			graphics->BeginDraw();
+
+			GameController::Render(&graphics);
+
+			graphics->EndDraw();
+		}
 	}
 
 	return message.wParam;
@@ -111,15 +133,6 @@ LRESULT CALLBACK WindowProc
 		PostQuitMessage(0);
 		return 0;
 		break;
-	}
-	case WM_PAINT:
-	{
-		graphics->BeginDraw();
-
-		graphics->ClearScreen(0, 0, .5);
-		graphics->DrawCircle(20, 20, 40, 1, 1, .5, 1);
-
-		graphics->EndDraw();
 	}
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
