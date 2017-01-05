@@ -109,14 +109,32 @@ int WINAPI wWinMain
 		{
 			// Update!
 			
+			if (ball.moveX == ball.left)
+			{
+				ball.coordX -= 2;
+			}
+			else if (ball.moveX == ball.right)
+			{
+				ball.coordX += 2;
+			}
+
+			if (ball.moveY == ball.up)
+			{
+				ball.coordY -= 2;
+			}
+			else if (ball.moveY == ball.down)
+			{
+				ball.coordY += 2;
+			}
+
 
 
 			// Render!
 			graphics->BeginDraw();
 
-			graphics->ClearScreen(.1, .8, .5);
+			graphics->ClearScreen(0.1f, 0.8f, 0.5f);
 
-			graphics->DrawCircle(ball.coordX, ball.coordY, 10, .75, .1, .9, 1);
+			graphics->DrawCircle(ball.coordX, ball.coordY, 10, 0.75f, .1f, .9f, 1.0f);
 
 			graphics->EndDraw();
 		}
@@ -148,22 +166,23 @@ LRESULT CALLBACK WindowProc
 		{
 			case VK_LEFT:
 			{
-				ball.coordX+=2;
+				ball.moveX = ball.left;
 				break;
 			}
 			case VK_RIGHT:
 			{
-				ball.coordX+=2;
+				ball.moveX = ball.right;
 				break;
 			}
 			case VK_UP:
 			{
-				ball.coordY-=2;
+
+				ball.moveY = ball.up;
 				break;
 			}
 			case VK_DOWN:
 			{
-				ball.coordY+=2;
+				ball.moveY = ball.down;
 				break;
 			}
 		} break;
@@ -174,11 +193,26 @@ LRESULT CALLBACK WindowProc
 		{
 		case VK_LEFT:
 		{
+			ball.moveX = ball.no;
 			break;
 		}
-		default:
+		case VK_RIGHT:
+		{
+			ball.moveX = ball.no;
 			break;
-		}break;
+		}
+		case VK_UP:
+		{
+
+			ball.moveY = ball.no;
+			break;
+		}
+		case VK_DOWN:
+		{
+			ball.moveY = ball.no;
+			break;
+		}
+		} break;
 	}
 
 	default:
