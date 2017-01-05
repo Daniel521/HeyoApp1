@@ -1,3 +1,4 @@
+/*
 #include "GameController.h"
 
 bool GameController::Loading;
@@ -48,3 +49,5 @@ void GameController::Update()
 
 	currentLevel->Update();
 }
+
+*/

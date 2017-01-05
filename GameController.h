@@ -1,3 +1,4 @@
+/*
 #ifndef GAMECONTROLLER_H
 #define GAMECONTROLLER_H
 
@@ -24,4 +25,4 @@ public:
 
 #endif // !GAMECONTROLLER_H
 
-
+*/

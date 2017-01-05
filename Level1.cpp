@@ -1,3 +1,5 @@
+/*
+
 #include "GameController.h"
 #include "Level1.h"
 #include "Graphics.h"
@@ -31,3 +33,5 @@ void Level1::Update()
 		ySpeed = -30.0f;
 	}
 }
+
+*/

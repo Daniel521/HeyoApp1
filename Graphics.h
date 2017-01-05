@@ -34,7 +34,7 @@ public:
 	void ClearScreen(float r, float g, float b);
 
 	// to draw a circle
-	void DrawCircle(float x, float y, float radius, float r, float g, float b, float a);
+	void DrawCircle(float xCenter, float yCenter, float radius, float r, float g, float b, float a);
 
 };
 
