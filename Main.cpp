@@ -5,11 +5,18 @@
 #include "GameController.h"
 #include "GameMemory.h"
 
-// Ball struct
-Ball ball;
+// $BOOBS
+//#include "SpriteSheet.h" // this should be in gamelevel.h but since it's all commented out, this shall od for now
+
+
 
 // Graphics pointer
 Graphics * graphics;
+
+// Ball struct
+Ball * ball = new Ball(graphics);
+
+
 
 LRESULT CALLBACK WindowProc
 (
@@ -109,22 +116,22 @@ int WINAPI wWinMain
 		{
 			// Update!
 			
-			if (ball.moveX == ball.left)
+			if (ball->moveX == ball->left)
 			{
-				ball.coordX -= 2;
+				ball->coordX -= 2;
 			}
-			else if (ball.moveX == ball.right)
+			else if (ball->moveX == ball->right)
 			{
-				ball.coordX += 2;
+				ball->coordX += 2;
 			}
 
-			if (ball.moveY == ball.up)
+			if (ball->moveY == ball->up)
 			{
-				ball.coordY -= 2;
+				ball->coordY -= 2;
 			}
-			else if (ball.moveY == ball.down)
+			else if (ball->moveY == ball->down)
 			{
-				ball.coordY += 2;
+				ball->coordY += 2;
 			}
 
 
@@ -134,12 +141,15 @@ int WINAPI wWinMain
 
 			graphics->ClearScreen(0.1f, 0.8f, 0.5f);
 
-			graphics->DrawCircle(ball.coordX, ball.coordY, 10, 0.75f, .1f, .9f, 1.0f);
+			graphics->DrawCircle(ball->coordX, ball->coordY, 10, 0.75f, .1f, .9f, 1.0f);
+
+			ball->sprites->Draw();
 
 			graphics->EndDraw();
 		}
 	}
 
+	delete graphics;
 	return message.wParam;
 }
 
@@ -166,23 +176,23 @@ LRESULT CALLBACK WindowProc
 		{
 			case VK_LEFT:
 			{
-				ball.moveX = ball.left;
+				ball->moveX = ball->left;
 				break;
 			}
 			case VK_RIGHT:
 			{
-				ball.moveX = ball.right;
+				ball->moveX = ball->right;
 				break;
 			}
 			case VK_UP:
 			{
 
-				ball.moveY = ball.up;
+				ball->moveY = ball->up;
 				break;
 			}
 			case VK_DOWN:
 			{
-				ball.moveY = ball.down;
+				ball->moveY = ball->down;
 				break;
 			}
 		} break;
@@ -193,23 +203,23 @@ LRESULT CALLBACK WindowProc
 		{
 		case VK_LEFT:
 		{
-			ball.moveX = ball.no;
+			ball->moveX = ball->no;
 			break;
 		}
 		case VK_RIGHT:
 		{
-			ball.moveX = ball.no;
+			ball->moveX = ball->no;
 			break;
 		}
 		case VK_UP:
 		{
 
-			ball.moveY = ball.no;
+			ball->moveY = ball->no;
 			break;
 		}
 		case VK_DOWN:
 		{
-			ball.moveY = ball.no;
+			ball->moveY = ball->no;
 			break;
 		}
 		} break;

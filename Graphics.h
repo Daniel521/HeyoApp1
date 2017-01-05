@@ -19,6 +19,13 @@ public:
 	//// This function runs once in main to initialize the interfaces with the necessary values
 	bool Init(HWND windowHandle);
 
+	// Used by spritesheet, so it can use renderTarget
+	ID2D1RenderTarget * GetRenderTarget()
+	{
+		return renderTarget;
+	}
+
+
 	// Our drawing functions?
 	void BeginDraw()
 	{
